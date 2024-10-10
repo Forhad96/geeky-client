@@ -3,16 +3,11 @@ import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from "@nextui-org/dropdown";
 import { Image } from "@nextui-org/image";
 import { HandThumbDownIcon, HandThumbUpIcon } from "../../icons";
-import Comment from "../comments/Comment";
 import CustomDropdown from "../../ui/shared/CustomDropdown";
+import CommentSection from "../comments/CommentSection";
+import CommentList from "../comments/CommentList";
 const dropDownItems = [
   { key: "new", label: "New file" },
   { key: "copy", label: "Copy link" },
@@ -36,7 +31,7 @@ export default function PostCard() {
           </div>
 
           <div>
-<CustomDropdown items={dropDownItems}/>
+            <CustomDropdown items={dropDownItems} />
           </div>
         </CardHeader>
         <Divider />
@@ -51,15 +46,15 @@ export default function PostCard() {
         </CardBody>
         <Divider />
         <CardFooter className="gap-4">
-          <Button className="w-full">
+          <Button variant="light" className="w-full">
             <HandThumbUpIcon />
             100k
           </Button>
-          <Button className="w-full">
+          <Button variant="light" className="w-full">
             <HandThumbDownIcon />
             10k
           </Button>
-          <Button className="w-full">
+          <Button variant="light" className="w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -77,7 +72,9 @@ export default function PostCard() {
             20
           </Button>
         </CardFooter>
-      <Comment/>
+        {/* <CommentSection /> */}
+        <CommentList/>
+
       </Card>
     </>
   );
