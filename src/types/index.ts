@@ -5,23 +5,15 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 
+// Define the type for the blog post
 export interface IPost {
-  _id: string;
   title: string;
+  slug: string;
   description: string;
-  images: string[];
-  location: string;
-  city: string;
-  dateFound: string;
-  status: string;
-  isReported: boolean;
-  reportCount: number;
-  category: ICategory;
-  user: IUser;
-  questions: string[];
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  content: string;
+  tags: string[];
+  category: string;
+  images?: { url: string; caption: string }[];
 }
 
 export interface ICategory {

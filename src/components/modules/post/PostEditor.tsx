@@ -8,17 +8,10 @@ import { generateSlug } from "@/src/lib/generateSlug";
 import { Input, Textarea } from "@nextui-org/input";
 import { Card } from "@nextui-org/card";
 import { Button } from "@nextui-org/button";
+import { IPost } from "@/src/types";
+import { useCreatePost } from "@/src/hooks/post.hook";
 
-// Define the type for the blog post
-interface TPost {
-  title: string;
-  slug: string;
-  description: string;
-  content: string;
-  tags: string[];
-  category: string;
-  images?: { url: string; caption: string }[];
-}
+
 
 export default function PostEditor() {
   const [title, setTitle] = useState<string>("");
@@ -28,6 +21,15 @@ export default function PostEditor() {
  const [category, setCategory] = useState<string>("");
 
   const [content, setContent] = useState<string>("");
+
+  const {
+    mutate: handleCreatePost,
+    isPending: createPostPending,
+    isSuccess,
+    isError
+  } = useCreatePost();
+
+
 
   // Handle title change and auto-generate slug
   function handleTitle(e: React.ChangeEvent<HTMLInputElement>) {
@@ -40,7 +42,7 @@ export default function PostEditor() {
   // Handle form submission
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
- const newBlog: TPost = {
+ const newBlog: IPost = {
    title,
    slug,
    description,
@@ -48,7 +50,7 @@ export default function PostEditor() {
    tags: tags.split(",").map((tag) => tag.trim()), // Convert tags to array
    category,
  };
-    console.log(newBlog);
+handleCreatePost(newBlog)
   }
 
   // Custom Quill toolbar
