@@ -1,3 +1,4 @@
+"use client"
 import Category from "@/src/components/modules/category/Category";
 import FollowList from "@/src/components/modules/follow/FllowList";
 import CreatePost from "@/src/components/modules/post/CreatePost";
@@ -6,8 +7,11 @@ import PostCard from "@/src/components/modules/post/PostCard";
 import ProfileCard from "@/src/components/modules/profile/ProfileCard";
 import TrendingCard from "@/src/components/modules/trandingPost/Trending";
 import CustomContainer from "@/src/components/ui/CustomContainer";
+import { useGetAllPost } from "@/src/hooks/post.hook";
 
 const page = () => {
+  const  {data } = useGetAllPost()
+  console.log(data);
   return (
     <CustomContainer>
       <div className="grid grid-cols-4 gap-4">
