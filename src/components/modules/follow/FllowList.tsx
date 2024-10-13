@@ -1,4 +1,6 @@
 import React from "react";
+import { Button } from "@nextui-org/button";
+import { Avatar } from "@nextui-org/avatar";
 
 const FollowList = () => {
   const users = [
@@ -24,13 +26,15 @@ const FollowList = () => {
       {users.map((user, index) => (
         <div
           key={index}
-          className="p-3 flex items-center justify-between border-b cursor-pointer  dark:hover:bg-gray-500 hover:bg-gray-200"
+          className="p-3 flex items-center justify-between cursor-pointer dark:hover:bg-light-text hover:bg-gray-200"
         >
           <div className="flex items-center">
-            <img
-              className="rounded-full h-10 w-10"
+            {/* Use NextUI Avatar component */}
+            <Avatar
               src={user.imgUrl}
               alt={user.name}
+              radius="full"
+              className="h-10 w-10"
             />
             <div className="ml-2 flex flex-col">
               <div className="leading-snug text-sm dark:text-white text-gray-900 font-bold">
@@ -41,9 +45,15 @@ const FollowList = () => {
               </div>
             </div>
           </div>
-          <button className="h-8 px-3 text-md font-bold text-blue-400 border border-blue-400 rounded-full hover:bg-blue-100">
+          {/* Use NextUI Button component */}
+          <Button
+            color="primary"
+            variant="bordered"
+            className="h-8 px-3 text-md font-bold text-blue-400 rounded-full"
+            radius="full"
+          >
             Follow
-          </button>
+          </Button>
         </div>
       ))}
     </div>

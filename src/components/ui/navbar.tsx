@@ -21,13 +21,35 @@ import NavbarDropdown from "./NavbarDropdown";
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "./theme-switch";
 import { useUser } from "@/src/context/user.context";
+import { Input } from "@nextui-org/input";
+import { Kbd } from "@nextui-org/kbd";
+import { SearchIcon } from "../icons";
 
 
 
 export const Navbar = () => {
   const { user, isLoading } = useUser();
   const router = useRouter();
-
+const searchInput = (
+  <Input
+    aria-label="Search"
+    classNames={{
+      inputWrapper: "bg-default-100",
+      input: "text-sm",
+    }}
+    endContent={
+      <Kbd className="hidden lg:inline-block" keys={["command"]}>
+        K
+      </Kbd>
+    }
+    labelPlacement="outside"
+    placeholder="Search..."
+    startContent={
+      <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
+    }
+    type="search"
+  />
+);
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -59,6 +81,8 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
+        {searchInput}
+
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>

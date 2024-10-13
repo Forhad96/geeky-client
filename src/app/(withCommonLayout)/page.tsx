@@ -1,3 +1,4 @@
+import Category from "@/src/components/modules/category/Category";
 import FollowList from "@/src/components/modules/follow/FllowList";
 import CreatePost from "@/src/components/modules/post/CreatePost";
 import PopularPost from "@/src/components/modules/post/PopularPost";
@@ -19,6 +20,7 @@ const page = () => {
           <PostCard />
         </section>
         <section className="col-span-1 ">{/* <PopularPost/> */}
+          <Category/>
           <TrendingCard/>
         </section>
       </div>
