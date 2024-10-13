@@ -1,11 +1,28 @@
-import TestComment from "../../../test/TestComment";
-import TestProfile from "../../../test/TestProfile";
+import FollowList from "@/src/components/modules/follow/FllowList";
+import CreatePost from "@/src/components/modules/post/CreatePost";
+import PopularPost from "@/src/components/modules/post/PopularPost";
+import PostCard from "@/src/components/modules/post/PostCard";
+import ProfileCard from "@/src/components/modules/profile/ProfileCard";
+import TrendingCard from "@/src/components/modules/trandingPost/Trending";
+import CustomContainer from "@/src/components/ui/CustomContainer";
 
-export default function Home() {
+const page = () => {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      {/* <TestProfile/>
-      <TestComment/> */}
-    </section>
+    <CustomContainer>
+      <div className="grid grid-cols-4 gap-4">
+        <section className="col-span-1">
+          <ProfileCard />
+          <FollowList />
+        </section>
+        <section className="col-span-2 ">
+          <CreatePost />
+          <PostCard />
+        </section>
+        <section className="col-span-1 ">{/* <PopularPost/> */}
+          <TrendingCard/>
+        </section>
+      </div>
+    </CustomContainer>
   );
-}
+};
+export default page;
