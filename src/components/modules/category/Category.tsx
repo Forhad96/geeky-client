@@ -40,7 +40,7 @@ const categories = [
 
 const Category = () => {
   return (
-    <Card className=" bg-dark-background text-white p-4 my-4">
+    <Card className="bg-light-background dark:bg-dark-background text-white p-4 mb-4">
       <CardBody className="p-0">
         {/* Topics and My Posts */}
         <div className="space-y-3">

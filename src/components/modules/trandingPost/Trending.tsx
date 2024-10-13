@@ -26,7 +26,7 @@ const trendingData = [
 
 const TrendingCard = () => {
   return (
-    <Card className="max-w-sm bg-dark-background  text-white">
+    <Card className="max-w-sm bg-light-card dark:bg-dark-background shadow-2xl text-white">
       <CardHeader className="flex items-center justify-between">
         <h4 className="ml-3 text-lg">Trending for you</h4>
         <svg
@@ -55,14 +55,20 @@ const TrendingCard = () => {
       <CardBody className="p-4">
         {trendingData.map((section, idx) => (
           <div key={idx}>
-            <p className="text-xs text-gray-500 mb-1">{section.category}</p>
+            <p className="text-xs text-light-text dark:text-dark-text mb-1">
+              {section.category}
+            </p>
             {section.trends.map((trend, trendIdx) => (
               <div
                 key={trendIdx}
                 className="flex justify-between items-center mb-3"
               >
-                <p className="text-sm">{trend.hashtag}</p>
-                <p className="text-xs text-gray-500">{trend.tweets}</p>
+                <p className="text-sm text-light-text dark:text-dark-text">
+                  {trend.hashtag}
+                </p>
+                <p className="text-xs text-light-text dark:text-dark-text">
+                  {trend.tweets}
+                </p>
               </div>
             ))}
             {idx < trendingData.length - 1 && <div className="h-2" />}

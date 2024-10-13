@@ -20,3 +20,22 @@ export const createPost = async (postData: IPost) => {
     throw new Error(error);
   }
 };
+
+
+export const getAllPost = async () => {
+  const accessToken = cookies().get("accessToken")?.value;
+  try {
+    const { data } = await axiosInstance.get("/posts/create-post",{
+      headers: {
+        Authorization: accessToken,
+      },
+    });
+
+    if (data.success) {
+    }
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
