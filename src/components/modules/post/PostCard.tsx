@@ -1,13 +1,16 @@
-"use client"
+"use client";
 import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import { Image } from "@nextui-org/image";
-import { HandThumbDownIcon, HandThumbUpIcon } from "../../icons";
+import { CommentIcon, HandThumbDownIcon, HandThumbUpIcon } from "../../icons";
 import CustomDropdown from "../../ui/shared/CustomDropdown";
-import CommentSection from "../comments/CommentSection";
 import CommentList from "../comments/CommentList";
+import React, { useState } from "react";
+import { IPost } from "@/src/types/post.type";
+
+
 const dropDownItems = [
   { key: "new", label: "New file" },
   { key: "copy", label: "Copy link" },
@@ -17,26 +20,59 @@ const dropDownItems = [
     label: "Delete file",
   },
 ];
-export default function PostCard() {
+
+interface PostCardProps {
+  post: IPost;
+}
+
+export default function PostCard({ post }: PostCardProps) {
+  const [showComments, setShowComments] = useState(false);
+const [isFollowed, setIsFollowed] = React.useState(false);
+  const toggleComments = () => {
+    setShowComments((prev) => !prev);
+  };
+console.log(post?.author?.username);
   return (
     <>
-      <Card className="mt-2 bg-light-background dark:bg-dark-background">
-        <CardHeader className="flex justify-between gap-3">
-          <div className="flex gap-3">
-            <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-            <div className="flex flex-col">
-              <p className="text-md">Samir Hossain</p>
-              <p className="text-small text-default-500">@samir</p>
+      <Card className="mt-2 bg-light-background dark:bg-dark-background cursor-pointer">
+        <CardHeader className="justify-between">
+          <div className="flex gap-5">
+            <Avatar
+              isBordered
+              radius="full"
+              size="md"
+              src="https://nextui.org/avatars/avatar-1.png"
+            />
+            <div className="flex flex-col gap-1 items-start justify-center">
+              <h4 className="text-small font-semibold leading-none text-default-600">
+                Zoey Lang
+              </h4>
+              <h5 className="text-small tracking-tight text-default-400">
+                @zoeylang
+              </h5>
             </div>
           </div>
-
-          <div>
+          <div className="flex gap-5">
+            <Button
+              className={
+                isFollowed
+                  ? "bg-transparent text-foreground border-default-200"
+                  : ""
+              }
+              color="primary"
+              radius="full"
+              size="sm"
+              variant={isFollowed ? "bordered" : "solid"}
+              onPress={() => setIsFollowed(!isFollowed)}
+            >
+              {isFollowed ? "Unfollow" : "Follow"}
+            </Button>
             <CustomDropdown items={dropDownItems} />
           </div>
         </CardHeader>
         <Divider />
         <CardBody>
-          <p>Make beautiful websites regardless of your design experience.</p>
+          <p>{post?.title}</p>
           <Image
             width={800}
             height={300}
@@ -48,34 +84,109 @@ export default function PostCard() {
         <CardFooter className="gap-4">
           <Button variant="light" className="w-full">
             <HandThumbUpIcon />
-            100k
+            {post?.upVotes}
           </Button>
           <Button variant="light" className="w-full">
             <HandThumbDownIcon />
-            10k
+            {post?.downVotes}
           </Button>
-          <Button variant="light" className="w-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
-              />
-            </svg>
-            20
+          <Button variant="light" className="w-full" onClick={toggleComments}>
+            <CommentIcon />
+            Comments
           </Button>
         </CardFooter>
-        {/* <CommentSection /> */}
-        <CommentList/>
-
+        {showComments && <CommentList />}
       </Card>
     </>
   );
 }
+
+
+
+
+
+[
+  {
+    title: "The Mysteries of Black Holes",
+    images: [],
+    content:
+      "Black holes are one of the most intriguing phenomena in the universe. This post delves into their formation, properties, and the latest research.",
+    tags: ["astronomy", "space", "science"],
+    category: "Science",
+    author: "66fe9b6c7ebde763bbdf1a6e",
+    upVotes: 0,
+    downVotes: 0,
+    isPremium: false,
+    views: 0,
+    pdfVersion: "",
+    isDeleted: false,
+    comments: 0,
+  },
+  {
+    title: "The Life Cycle of Stars",
+    images: [],
+    content:
+      "Stars go through various stages from birth to death. This post explores the life cycle of stars and the different types of stars in the universe.",
+    tags: ["astronomy", "space", "science"],
+    category: "Science",
+    author: "66fe9b6c7ebde763bbdf1a6e",
+    upVotes: 0,
+    downVotes: 0,
+    isPremium: false,
+    views: 0,
+    pdfVersion: "",
+    isDeleted: false,
+    comments: 0,
+  },
+  {
+    title: "Exploring Exoplanets",
+    images: [],
+    content:
+      "Exoplanets are planets that orbit stars outside our solar system. This post discusses the methods used to discover exoplanets and what we have learned about them.",
+    tags: ["astronomy", "space", "science"],
+    category: "Science",
+    author: "66fe9b6c7ebde763bbdf1a6e",
+    upVotes: 0,
+    downVotes: 0,
+    isPremium: false,
+    views: 0,
+    pdfVersion: "",
+    isDeleted: false,
+    comments: 0,
+  },
+  {
+    title: "The Big Bang Theory",
+    images: [],
+    content:
+      "The Big Bang Theory is the leading explanation for the origin of the universe. This post explains the theory and the evidence supporting it.",
+    tags: ["astronomy", "space", "science"],
+    category: "Science",
+    author: "66fe9b6c7ebde763bbdf1a6e",
+    upVotes: 0,
+    downVotes: 0,
+    isPremium: false,
+    views: 0,
+    pdfVersion: "",
+    isDeleted: false,
+    comments: 0,
+    createdAt: "2024-10-11T06:47:29.171Z",
+    updatedAt: "2024-10-11T06:47:29.171Z",
+    __v: 0,
+  },
+  {
+    title: "The Search for Dark Matter",
+    images: [],
+    content:
+      "Dark matter makes up a significant portion of the universe, yet it remains elusive. This post explores what we know about dark matter and the ongoing search to understand it.",
+    tags: ["astronomy", "space", "science"],
+    category: "Science",
+    author: "66fe9b6c7ebde763bbdf1a6e",
+    upVotes: 0,
+    downVotes: 0,
+    isPremium: false,
+    views: 0,
+    pdfVersion: "",
+    isDeleted: false,
+    comments: 0,
+  },
+];

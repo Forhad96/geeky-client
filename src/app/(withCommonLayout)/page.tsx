@@ -10,8 +10,8 @@ import CustomContainer from "@/src/components/ui/CustomContainer";
 import { useGetAllPost } from "@/src/hooks/post.hook";
 
 const page = () => {
-  const  {data } = useGetAllPost()
-  console.log(data);
+  const  {data:allPost } = useGetAllPost()
+  console.log(allPost);
   return (
     <CustomContainer>
       <div className="grid grid-cols-4 gap-4">
@@ -21,9 +21,15 @@ const page = () => {
         </section>
         <section className="col-span-2 ">
           <CreatePost />
-          <PostCard />
+          {
+            allPost?.data?.map(post => 
+
+              <PostCard key={post._id} post={post} />
+            )
+          }
         </section>
-        <section className="col-span-1 ">{/* <PopularPost/> */}
+        <section className="col-span-1 ">
+          {/* <PopularPost/> */}
           <Category/>
           <TrendingCard/>
         </section>
