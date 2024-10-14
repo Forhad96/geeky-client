@@ -30,8 +30,25 @@ export const getAllPost = async () => {
       },
     });
 
-    if (data.success) {
-    }
+    // if (data.success) {
+    // }
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+export const getSinglePost = async (id:string) => {
+  const accessToken = cookies().get("accessToken")?.value;
+  try {
+    const { data } = await axiosInstance.get(`/posts/${id}`, {
+      headers: {
+        Authorization: accessToken,
+      },
+    });
+
+    // if (data.success) {
+    // }
 
     return data;
   } catch (error: any) {

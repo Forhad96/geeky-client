@@ -1,7 +1,14 @@
+"use client"
+import { useUser } from "@/src/context/user.context";
+import { useGetMyProfile } from "@/src/hooks/myProfile.hook";
 import { Divider } from "@nextui-org/divider";
 import React from "react";
+import Loading from "../../ui/Loading";
 
 const ProfileCard = () => {
+  const {data:user,isLoading} = useGetMyProfile()
+  if(isLoading) <Loading/>
+    // console.log(user);
   return (
     <div className="max-w-2xl mx-4 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto dark:bg-dark-background bg-light-background shadow-2xl mb-8 rounded-lg text-gray-900">
       <div className="rounded-t-lg h-28 overflow-hidden">
@@ -19,11 +26,9 @@ const ProfileCard = () => {
         />
       </div>
       <div className="text-center mt-2">
-        <h2 className="font-semibold dark:text-white">Sarah Smith</h2>
-        <p className="dark:text-gray-500">@sarasmit</p>
-        <p className="text-gray-500 dark:text-gray-300">
-          Freelance Web Designer
-        </p>
+        <h2 className="font-semibold dark:text-white">{user?.data?.name}</h2>
+        <p className="dark:text-gray-500">@{user?.data?.username}</p>
+        <p className="text-gray-500 dark:text-gray-300">{user?.data?.email}</p>
       </div>
 
       <ul className="py-4 mt-2 border-y border-y-gray-400 text-gray-700 flex items-center justify-around">

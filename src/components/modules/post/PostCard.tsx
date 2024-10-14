@@ -42,7 +42,7 @@ export default function PostCard({ post }: PostCardProps) {
     <div onClick={handleNavigate}>
       <Card
         onClick={handleNavigate}
-        className="mt-2 bg-light-background dark:bg-dark-background cursor-pointer"
+        className="mt-2 bg-light-background dark:bg-dark-background cursor-pointer hover:scale-105"
       >
         <CardHeader className="justify-between">
           <div className="flex gap-5">
