@@ -10,7 +10,6 @@ import CommentList from "../comments/CommentList";
 import React, { useState } from "react";
 import { IPost } from "@/src/types/post.type";
 
-
 const dropDownItems = [
   { key: "new", label: "New file" },
   { key: "copy", label: "Copy link" },
@@ -27,11 +26,11 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   const [showComments, setShowComments] = useState(false);
-const [isFollowed, setIsFollowed] = React.useState(false);
+  const [isFollowed, setIsFollowed] = React.useState(false);
   const toggleComments = () => {
     setShowComments((prev) => !prev);
   };
-console.log(post?.author?.username);
+  console.log(post?.author?.username);
   return (
     <>
       <Card className="mt-2 bg-light-background dark:bg-dark-background cursor-pointer">
@@ -45,10 +44,10 @@ console.log(post?.author?.username);
             />
             <div className="flex flex-col gap-1 items-start justify-center">
               <h4 className="text-small font-semibold leading-none text-default-600">
-                Zoey Lang
+                {post?.author?.name}
               </h4>
               <h5 className="text-small tracking-tight text-default-400">
-                @zoeylang
+                @{post?.author?.username}
               </h5>
             </div>
           </div>
@@ -72,13 +71,35 @@ console.log(post?.author?.username);
         </CardHeader>
         <Divider />
         <CardBody>
-          <p>{post?.title}</p>
-          <Image
-            width={800}
-            height={300}
-            alt="NextUI hero Image"
-            src="https://nextui.org/images/hero-card-complete.jpeg"
-          />
+          <div className="flex justify-between">
+            <div className="w-10/12">
+              <p className="font-blod">{post?.title}</p>
+              <p className="overflow-ellipsis py-2 text-sm">{post?.content}</p>
+              <span className="pt-2">
+                #FrontendWithZoey
+                <span className="py-2" aria-label="computer" role="img">
+                  💻
+                </span>
+              </span>
+            </div>
+            <Image
+              width={400}
+              className=""
+              height={150}
+              alt="NextUI hero Image"
+              src="https://nextui.org/images/hero-card-complete.jpeg"
+            />
+          </div>
+          <div className="flex gap-3">
+            <div className="flex gap-1">
+              <p className="font-semibold text-default-400 text-small">4</p>
+              <p className=" text-default-400 text-small">Following</p>
+            </div>
+            <div className="flex gap-1">
+              <p className="font-semibold text-default-400 text-small">97.1K</p>
+              <p className="text-default-400 text-small">Followers</p>
+            </div>
+          </div>
         </CardBody>
         <Divider />
         <CardFooter className="gap-4">
@@ -100,10 +121,6 @@ console.log(post?.author?.username);
     </>
   );
 }
-
-
-
-
 
 [
   {
