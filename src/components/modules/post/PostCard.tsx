@@ -9,6 +9,7 @@ import CustomDropdown from "../../ui/shared/CustomDropdown";
 import CommentList from "../comments/CommentList";
 import React, { useState } from "react";
 import { IPost } from "@/src/types/post.type";
+import { useRouter } from "next/navigation";
 
 const dropDownItems = [
   { key: "new", label: "New file" },
@@ -27,13 +28,22 @@ interface PostCardProps {
 export default function PostCard({ post }: PostCardProps) {
   const [showComments, setShowComments] = useState(false);
   const [isFollowed, setIsFollowed] = React.useState(false);
+  const router = useRouter();
   const toggleComments = () => {
     setShowComments((prev) => !prev);
   };
-  console.log(post?.author?.username);
+  // console.log(post?.author?.username);
+
+  const handleNavigate = () => {
+    router.push(`/post/${post._id}`);
+    // console.log("okkkkkk");
+  };
   return (
-    <>
-      <Card className="mt-2 bg-light-background dark:bg-dark-background cursor-pointer">
+    <div onClick={handleNavigate}>
+      <Card
+        onClick={handleNavigate}
+        className="mt-2 bg-light-background dark:bg-dark-background cursor-pointer"
+      >
         <CardHeader className="justify-between">
           <div className="flex gap-5">
             <Avatar
@@ -118,7 +128,7 @@ export default function PostCard({ post }: PostCardProps) {
         </CardFooter>
         {showComments && <CommentList />}
       </Card>
-    </>
+    </div>
   );
 }
 

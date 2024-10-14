@@ -10,6 +10,7 @@ import { Card } from "@nextui-org/card";
 import { Button } from "@nextui-org/button";
 import { IPost } from "@/src/types";
 import { useCreatePost } from "@/src/hooks/post.hook";
+import PostView from "./PostView";
 
 
 
@@ -167,36 +168,7 @@ handleCreatePost(newBlog)
         </Card>
 
         {/* Blog View */}
-        <Card className="w-full max-w-3xl p-8 my-6 mx-auto">
-          <h2 className="text-3xl font-bold border-b border-gray-400 pb-2 mb-5">
-            View
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-            {/* Title */}
-            <div className="sm:col-span-2">
-              <h3 className="font-medium">Title</h3>
-              <p className="text-2xl font-bold">{title}</p>
-            </div>
-
-            {/* Slug */}
-            <div className="sm:col-span-2">
-              <h3 className="font-medium">Slug</h3>
-              <p>{slug}</p>
-            </div>
-
-            {/* Description */}
-            <div className="sm:col-span-2">
-              <h3 className="font-medium">Description</h3>
-              <p>{description}</p>
-            </div>
-
-            {/* Content */}
-            <div className="sm:col-span-2">
-              <h3 className="font-medium">Content</h3>
-              <div>{parse(content)}</div>
-            </div>
-          </div>
-        </Card>
+<PostView post={{title,category,content}}/>
       </div>
     </div>
   );
