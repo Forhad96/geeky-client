@@ -1,9 +1,9 @@
 "use client";
-import { useUser } from "@/src/context/user.context";
 import { useGetMyProfile } from "@/src/hooks/myProfile.hook";
 import { Divider } from "@nextui-org/divider";
 import React from "react";
 import Loading from "../../ui/Loading";
+import { useGetFollowCount } from "@/src/hooks/follow.hook";
 
 // Define a type for the user profile data
 interface UserProfile {
@@ -26,12 +26,17 @@ interface UserProfile {
 }
 
 const ProfileCard: React.FC = () => {
-  const { data: user, isLoading } = useGetMyProfile();
+  const { data: profileData, isLoading: isProfileLoading } = useGetMyProfile();
+  const { data: followData, isLoading: isFollowDataLoading } =
+    useGetFollowCount();
 
-  if (isLoading) return <Loading />;
+  const userProfile = profileData?.data as UserProfile | undefined;
+  const followCounts = followData?.data as {
+    followers: string;
+    following: string;
+  };
 
-  // Ensure user data is of the expected type
-  const userData = user?.data as UserProfile | undefined;
+  if (isProfileLoading && isFollowDataLoading) return <Loading />;
 
   return (
     <div className="max-w-2xl mx-4 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto dark:bg-dark-background bg-light-background shadow-2xl mb-8 rounded-lg text-gray-900">
@@ -45,29 +50,28 @@ const ProfileCard: React.FC = () => {
       <div className="mx-auto size-28 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
         <img
           className="object-cover object-center h-28"
-          src={userData?.profilePhoto}
-          alt={`${userData?.name} Photo`}
+          src={userProfile?.profilePhoto}
+          alt={`${userProfile?.name} Photo`}
         />
       </div>
       <div className="text-center mt-2">
-        <h2 className="font-semibold dark:text-white">{userData?.name}</h2>
-        <p className="dark:text-gray-500">@{userData?.username}</p>
-        <p className="text-gray-500 dark:text-gray-300">{userData?.email}</p>
+        <h2 className="font-semibold dark:text-white">{userProfile?.name}</h2>
+        <p className="dark:text-gray-500">@{userProfile?.username}</p>
+        <p className="text-gray-500 dark:text-gray-300">{userProfile?.email}</p>
       </div>
 
       <ul className="py-4 mt-2 border-y border-y-gray-400 text-gray-700 flex items-center justify-around">
         <li className="flex flex-col items-center justify-around">
           <div className="font-bold dark:text-white">
-            {userData ? userData.following.length : 0}
+            {followCounts?.following}
           </div>
           <div className="dark:text-gray-300">Following</div>
         </li>
-        {/* <Divider className="" orientation="vertical" /> */}
         <li className="flex flex-col items-center justify-around">
           <div className="font-bold dark:text-white">
-            {userData ? userData.followers.length : 0}
+            {followCounts?.followers}
           </div>
-          <div className="dark:text-gray-300">Follower</div>
+          <div className="dark:text-gray-300">Followers</div>
         </li>
       </ul>
       <div className="p-2 mx-2 mt-2">

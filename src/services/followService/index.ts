@@ -1,9 +1,7 @@
-"use server"
+"use server";
 import axiosInstance from "@/src/lib/axiosInstance";
 import { IFollow } from "@/src/types";
 import { cookies } from "next/headers";
-
-
 
 export const createFollow = async (followData: IFollow) => {
   const accessToken = cookies().get("accessToken")?.value;
@@ -26,17 +24,14 @@ export const createFollow = async (followData: IFollow) => {
     throw new Error(error);
   }
 };
-export const availableFollow = async () => {
+export const getAvailableFollow = async () => {
   const accessToken = cookies().get("accessToken")?.value;
   try {
-    const { data } = await axiosInstance.get(
-      "/follows/available-follow",
-      {
-        headers: {
-          Authorization: accessToken,
-        },
-      }
-    );
+    const { data } = await axiosInstance.get("/follows/available-follow", {
+      headers: {
+        Authorization: accessToken,
+      },
+    });
 
     if (data.success) {
     }
@@ -46,3 +41,21 @@ export const availableFollow = async () => {
     throw new Error(error);
   }
 };
+export const getFollowCount = async () => {
+  const accessToken = cookies().get("accessToken")?.value;
+  try {
+    const { data } = await axiosInstance.get("follows/follow-count", {
+      headers: {
+        Authorization: accessToken,
+      },
+    });
+
+    if (data.success) {
+    }
+
+    return data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+// export const get
