@@ -1,29 +1,35 @@
+"use client";
 import React from "react";
 import { Button } from "@nextui-org/button";
 import { Avatar } from "@nextui-org/avatar";
+import { useGetAvailableFollow } from "@/src/hooks/availableFollow.hook";
+import Loading from "../../ui/Loading";
+export interface TUser {
+  _id: string;
+  name: string;
+  username: string;
+  role: string;
+  email: string;
+  status: string;
+  mobileNumber: string;
+  profilePhoto: string;
+  isVerified: boolean;
+  isPremiumUser: boolean;
+  followers: any[];
+  following: any[];
+  posts: any[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
 
 const FollowList = () => {
-  const users = [
-    {
-      name: "Jane Doe",
-      username: "@jane",
-      imgUrl: "https://loremflickr.com/g/600/600/girl",
-    },
-    {
-      name: "John Doe",
-      username: "@john",
-      imgUrl: "https://loremflickr.com/g/600/600/boy",
-    },
-    {
-      name: "Paris",
-      username: "@paris",
-      imgUrl: "https://loremflickr.com/g/600/600/paris",
-    },
-  ];
-
+  const { data, isLoading } = useGetAvailableFollow();
+  if (isLoading) <Loading />;
+  const followList = data?.data as TUser[];
   return (
-    <div className="rounded-2xl shadow-2xl dark:bg-dark-background bg-light-background">
-      {users.map((user, index) => (
+    <div className="rounded-2xl shadow-2xl max-h-[500px] overflow-scroll dark:bg-dark-background bg-light-background">
+      {followList?.map((user, index) => (
         <div
           key={index}
           className="p-3 flex items-center justify-between cursor-pointer dark:hover:bg-light-text hover:bg-gray-200"
@@ -31,17 +37,17 @@ const FollowList = () => {
           <div className="flex items-center">
             {/* Use NextUI Avatar component */}
             <Avatar
-              src={user.imgUrl}
-              alt={user.name}
+              src={user?.profilePhoto}
+              alt={user?.name}
               radius="full"
               className="h-10 w-10"
             />
             <div className="ml-2 flex flex-col">
               <div className="leading-snug text-sm dark:text-white text-gray-900 font-bold">
-                {user.name}
+                {user?.name}
               </div>
               <div className="leading-snug text-xs dark:text-gray-300 text-gray-600">
-                {user.username}
+                {user?.username}
               </div>
             </div>
           </div>
