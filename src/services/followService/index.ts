@@ -1,15 +1,16 @@
 "use server"
 import axiosInstance from "@/src/lib/axiosInstance";
+import { IFollow } from "@/src/types";
 import { cookies } from "next/headers";
 
 
 
-export const createFollow = async (userId: string) => {
+export const createFollow = async (followData: IFollow) => {
   const accessToken = cookies().get("accessToken")?.value;
   try {
     const { data } = await axiosInstance.post(
       "/follows/create-follow",
-      userId,
+      followData,
       {
         headers: {
           Authorization: accessToken,

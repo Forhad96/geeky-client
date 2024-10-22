@@ -2,8 +2,12 @@
 import React from "react";
 import { Button } from "@nextui-org/button";
 import { Avatar } from "@nextui-org/avatar";
-import { useGetAvailableFollow } from "@/src/hooks/availableFollow.hook";
+import {
+  useCreateFollow,
+  useGetAvailableFollow,
+} from "@/src/hooks/follow.hook";
 import Loading from "../../ui/Loading";
+import { useUser } from "@/src/context/user.context";
 export interface TUser {
   _id: string;
   name: string;
@@ -25,8 +29,23 @@ export interface TUser {
 
 const FollowList = () => {
   const { data, isLoading } = useGetAvailableFollow();
-  if (isLoading) <Loading />;
+  const { user, isLoading: isUserLoading } = useUser();
+  const {
+    mutate: handleCreateFollow,
+    isPending,
+    isError,
+    isSuccess,
+  } = useCreateFollow();
+  if (isLoading && isUserLoading) <Loading />;
   const followList = data?.data as TUser[];
+
+  const handleSubmit = (followingId: string) => {
+    const followData = {
+      followerId: user?._id as string,
+      followingId: followingId,
+    };
+    handleCreateFollow(followData);
+  };
   return (
     <div className="rounded-2xl shadow-2xl max-h-[500px] overflow-scroll dark:bg-dark-background bg-light-background">
       {followList?.map((user, index) => (
@@ -53,6 +72,7 @@ const FollowList = () => {
           </div>
           {/* Use NextUI Button component */}
           <Button
+            onClick={() => handleSubmit(user?._id)}
             color="primary"
             variant="bordered"
             className="h-8 px-3 text-md font-bold text-blue-400 rounded-full"

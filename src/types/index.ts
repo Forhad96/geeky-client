@@ -109,3 +109,10 @@ export interface ISearchResult {
   thumbnail: string;
   id: string;
 }
+
+
+
+export interface IFollow {
+  followerId: string;
+  followingId: string;
+}
