@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 export const getMyProfile = async (userId: string | undefined) => {
   const accessToken = cookies().get("accessToken")?.value;
   try {
-    const { data } = await axiosInstance.get(`/users/${userId}`, {
+    const { data } = await axiosInstance.get(`/profile`, {
       headers: {
         Authorization: accessToken,
       },
