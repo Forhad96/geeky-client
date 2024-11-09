@@ -263,6 +263,27 @@ export const SearchIcon = (props: IconSvgProps) => (
     />
   </svg>
 );
+export const DownArrow = ({ size = 24, width, height, ...props }: IconSvgProps) => (
+  <svg
+    aria-hidden="true"
+    focusable="false"
+    height={size || height}
+    role="presentation"
+    viewBox="0 0 24 24"
+    width={size || width}
+    stroke="currentColor"
+    fill="none"
+    className="size-6"
+    strokeWidth={1.5}
+    {...props}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="m19.5 8.25-7.5 7.5-7.5-7.5"
+    />
+  </svg>
+);
 
 export const NextUILogo: React.FC<IconSvgProps> = (props) => {
   const { width, height = 40 } = props;
@@ -291,3 +312,4 @@ export const NextUILogo: React.FC<IconSvgProps> = (props) => {
     </svg>
   );
 };
+
