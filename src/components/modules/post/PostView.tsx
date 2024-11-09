@@ -12,13 +12,13 @@ const PostView:FC<PostViewProps> = ({post}) => {
         {/* <h2 className="text-3xl font-bold border-b border-gray-400 pb-2 mb-5">
           View
         </h2> */}
-         <Image
+         {/* <Image
       width={1200}
       height={300}
       className="w-full object-cover"
       alt="NextUI hero Image with delay"
       src="https://app.requestly.io/delay/5000/https://nextui.org/images/hero-card-complete.jpeg"
-    />
+    /> */}
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           {/* Title */}
           <div className="sm:col-span-2">

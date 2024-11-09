@@ -1,15 +1,20 @@
-"use client"
+"use client";
 
-import {Tabs, Tab,} from '@nextui-org/tabs';
-import {  Card, CardBody, CardHeader } from '@nextui-org/card';
+import { Tabs, Tab } from "@nextui-org/tabs";
+import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { useGetAllPost } from "@/src/hooks/post.hook";
+import PostCard from "../post/PostCard";
+import CreatePost from "../post/CreatePost";
+import { IPost } from "@/src/types/post.type";
+import ProfileContent from "./ProfileContent";
 
 export default function TabGroup() {
+  const { data: allPost } = useGetAllPost();
   let tabs = [
     {
       id: "post",
       label: "Posts",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      content: <ProfileContent/>
     },
     {
       id: "about",
@@ -38,7 +43,7 @@ export default function TabGroup() {
   ];
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="mt-4 flex w-full flex-col">
       <Tabs aria-label="Dynamic tabs" items={tabs}>
         {(item) => (
           <Tab key={item.id} title={item.label}>

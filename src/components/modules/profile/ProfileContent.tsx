@@ -18,10 +18,6 @@ const ProfileContent = () => {
           <PostCard key={post._id} post={post} />
         ))}
       </section>
-      {/* <section className="col-span-1">
-        <Category />
-        <TrendingCard />
-      </section> */}
     </div>
   );
 };

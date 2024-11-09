@@ -1,13 +1,20 @@
 import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
 import { Input, Textarea } from "@nextui-org/input";
+import { useRouter } from "next/navigation";
 
 const CreatePost = () => {
+    const router = useRouter();
+
+
+    const handleCreatePost = () => {
+      router.push("/add-post");
+    };
   return (
     <div className="h-28 bg-light-background dark:bg-dark-background p-4 rounded-md">
       <div className="flex items-center gap-2">
         <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-        <Input placeholder="Whats Happening's.." size="lg" className="flex-1" />
+        <Input onClick={handleCreatePost} placeholder="Whats Happening's.." size="lg" className="flex-1" />
       </div>
       <div className="flex items-center justify-end gap-2 mt-3">
         <svg
