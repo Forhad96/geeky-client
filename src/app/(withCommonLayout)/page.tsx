@@ -18,21 +18,20 @@ const page = () => {
       <div className="grid grid-cols-4 gap-4">
         <section className="col-span-1">
           <ProfileCard />
+          <div>
           <FollowList />
+          </div>
         </section>
         <section className="col-span-2 ">
           <CreatePost />
-          {
-            allPost?.data?.map((post:IPost) => 
-
-              <PostCard key={post._id} post={post} />
-            )
-          }
+          {allPost?.data?.map((post: IPost) => (
+            <PostCard key={post._id} post={post} />
+          ))}
         </section>
         <section className="col-span-1 ">
           {/* <PopularPost/> */}
-          <Category/>
-          <TrendingCard/>
+          <Category />
+          <TrendingCard />
         </section>
       </div>
     </CustomContainer>

@@ -48,6 +48,8 @@ const FollowList = () => {
   };
   return (
     <div className="rounded-2xl shadow-2xl max-h-[500px] overflow-scroll dark:bg-dark-background bg-light-background">
+      <h2 className="text-center text-xl py-4">Suggestions for you</h2>
+
       {followList?.map((user, index) => (
         <div
           key={index}
